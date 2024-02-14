@@ -8,6 +8,7 @@ const createBook = async (req, res) => {
 
     const path_upload = path.join(__dirname, '../uploads');
     console.log(path_upload)
+    console.log(req.originalname)
     const img_url = req.file ? `http://localhost:3000/images/`+req.file.originalname : null; // Get the path of the uploaded image
 
     try {
@@ -25,7 +26,7 @@ const createBook = async (req, res) => {
 // Get all books
 const getAllBooks = async (req, res) => {
     try {
-        const books = await pool.query('SELECT * FROM books');
+        const books = await pool.query('SELECT *,categories.name as category_name FROM books inner join categories on categories.id=books.category_id inner join authors on authors.id=books.author_id ');
         res.status(200).json(books.rows);
     } catch (error) {
         console.error('Error getting books:', error);

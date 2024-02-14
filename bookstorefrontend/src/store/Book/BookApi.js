@@ -22,7 +22,19 @@ export const getBookById = async (id) => {
 
 export const createBook = async (bookData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/books`, bookData);
+    const formData = new FormData();
+    formData.append('title', bookData.title);
+    formData.append('author_id', bookData.author_id);
+    formData.append('category_id', bookData.category_id);
+    formData.append('price', bookData.price);
+    formData.append('image', bookData.image);
+
+    const response = await axios.post(`${BASE_URL}/books`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    
     return response.data;
   } catch (error) {
     throw new Error('Error creating book: ' + error.message);
