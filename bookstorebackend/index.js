@@ -5,6 +5,7 @@ const bookRoutes = require('./routes/bookRoutes.js');
 const authorRoutes = require('./routes/authorRoutes');
 const customerRoutes = require('./routes/customerRoutes.js');
 const orderRoutes = require('./routes/orderRoutes.js');
+const analyticsRoutes = require('./routes/AnalyticsRoutes.js'); //
 const cors = require('cors')
 const path = require('path');
 const app = express();
@@ -24,6 +25,9 @@ app.use('/api/books', bookRoutes);
 app.use('/api/authors', authorRoutes);
 app.use('/api/customers', customerRoutes);
 app.use('/api/orders', orderRoutes);
+
+
+app.use('/api/analytics', analyticsRoutes);
 app.get('/', (req, res) => {
  
 

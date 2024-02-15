@@ -26,7 +26,7 @@ const createBook = async (req, res) => {
 // Get all books
 const getAllBooks = async (req, res) => {
     try {
-        const books = await pool.query('SELECT *,categories.name as category_name FROM books inner join categories on categories.id=books.category_id inner join authors on authors.id=books.author_id ');
+        const books = await pool.query('SELECT books.id as id,title,img_url,price,authors.id as author_id ,categories.name as category_name FROM books inner join categories on categories.id=books.category_id inner join authors on authors.id=books.author_id ');
         res.status(200).json(books.rows);
     } catch (error) {
         console.error('Error getting books:', error);

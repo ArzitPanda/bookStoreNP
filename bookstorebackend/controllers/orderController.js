@@ -77,12 +77,12 @@ const getOrderById = async (req, res) => {
 // Update an order by ID
 const getAllOrders = async (req, res) => {
     try {
-        const ordersResult = await pool.query('SELECT * FROM orders');
+        const ordersResult = await pool.query('SELECT orders.*, customers.name AS customer_name FROM orders INNER JOIN customers ON orders.customer_id = customers.id;');
         const orders = ordersResult.rows;
 
         for (const order of orders) {
             const orderBooksResult = await pool.query(
-                'SELECT books.*, order_books.quantity FROM order_books INNER JOIN books ON order_books.book_id = books.id WHERE order_books.order_id = $1',
+                'SELECT books.*, order_books.quantity FROM order_books INNER JOIN books ON order_books.book_id = books.id  WHERE order_books.order_id = $1',
                 [order.id]
             );
             order.books = orderBooksResult.rows;
