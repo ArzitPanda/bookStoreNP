@@ -87,4 +87,44 @@ router.get('/popular-books', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+
+
+router.get('/total-payable-by-date', async (req, res) => {
+    try {
+        const query = `
+            SELECT SUM(payable_amount) AS total_payable_amount, DATE(orderdate) AS date
+            FROM orders
+            GROUP BY DATE(orderdate)
+        `;
+        
+        const { rows } = await pool.query(query);
+        res.json(rows);
+    } catch (error) {
+        console.error('Error fetching total payable amount by date:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+router.get('/most-loved-authors', async (req, res) => {
+    try {
+        const query = `
+            SELECT a.name AS author_name, SUM(ob.quantity) AS total_quantity_sold
+            FROM books b
+            JOIN authors a ON b.author_id = a.id
+            JOIN order_books ob ON b.id = ob.book_id
+            GROUP BY a.id, a.name
+            ORDER BY total_quantity_sold DESC
+        `;
+        
+        const { rows } = await pool.query(query);
+        res.json(rows);
+    } catch (error) {
+        console.error('Error fetching most loved authors:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
 module.exports = router;

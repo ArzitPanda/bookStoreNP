@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AppBar, Avatar, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem, Toolbar, Typography, useMediaQuery } from "@mui/material";
-import { Home, Person, Book, Group, Category, MenuOpenOutlined } from '@mui/icons-material';
+import { Home, Person, Book, Group, Category, MenuOpenOutlined, Analytics } from '@mui/icons-material';
 import StoreAvatarCard from "@/components/StoreAvatarCard";
 import Link from "next/link";
 import { Provider } from "react-redux";
@@ -97,6 +97,7 @@ export default function RootLayout({ children }) {
          <MenuItem component={Link} href="/books" onClick={handleMenuClose}>Books</MenuItem>
          <MenuItem component={Link} href="/authors" onClick={handleMenuClose}>Authors</MenuItem>
          <MenuItem component={Link} href="/Category" onClick={handleMenuClose}>Categories</MenuItem>
+         <MenuItem component={Link} href="/analytics" onClick={handleMenuClose}>Analytics</MenuItem>
        </Menu>
      </AppBar>
     ) : (
@@ -127,6 +128,7 @@ export default function RootLayout({ children }) {
           { text: 'Books', icon: <Book />, to: '/books' },
           { text: 'Authors', icon: <Group />, to: '/authors' },
           { text: 'Category', icon: <Category />, to: '/Category' },
+          { text: 'Analytics', icon: <Analytics />, to: '/analytics' },
         ].map((item, index) => (
           <ListItem 
           component={Link} 
