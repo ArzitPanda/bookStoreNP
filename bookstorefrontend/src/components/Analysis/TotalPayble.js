@@ -37,7 +37,7 @@ const TimeSeriesChart = () => {
         label: 'Total Payable Amount',
         data: dataPoints,
         fill: false,
-        borderColor: 'rgb(75, 192, 192)',
+        borderColor: '#1DA1F2',
         tension: 0.1
       }
     ]

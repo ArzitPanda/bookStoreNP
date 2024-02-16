@@ -8,7 +8,11 @@ import StoreAvatarCard from "@/components/StoreAvatarCard";
 import Link from "next/link";
 import { Provider } from "react-redux";
 import store from "@/store";
+ 
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from "react";
+import { NotificationProvider } from "@/components/NotificationProvider/useNotification";
+import Notification from "@/components/Notification/Notification";
 const theme = createTheme({
   palette: {
     primary: {
@@ -37,6 +41,12 @@ const drawerWidth = 300;
 
 
 export default function RootLayout({ children }) {
+
+
+
+  const pathname = usePathname()
+
+
   // const isSmallScreen = useMediaQuery((themes) => themes.breakpoints.down('sm'));
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -69,6 +79,7 @@ export default function RootLayout({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store} >
+      
     <html lang="en">
       <body className={inter.className} style={{}} >
       {isSmallScreen? (
@@ -135,11 +146,13 @@ export default function RootLayout({ children }) {
           href={item.to}
             key={item.text} 
             sx={{ 
-              color: 'black', 
+              color: pathname===item.to ? 'white':'black', 
+              backgroundColor:pathname===item.to ? 'primary.dark':'white',
               borderRadius:6,
               '&:hover': {
-                backgroundColor: 'primary.dark',
-                color: 'white'
+                backgroundColor: pathname!==item.to ? 'primary.dark':'white',
+                color: pathname!==item.to ? 'white':'black',
+                transition:'background-color 0.3s ease, color 0.3s ease'
               },
               marginBottom:'2px'
             }}
@@ -154,13 +167,16 @@ export default function RootLayout({ children }) {
       </List>
     </Drawer>)}
       <main>
-       
+      <Notification />
         {children}
+          
       </main>
+ 
  
 
         </body>
     </html>
+
     </Provider>
     </ThemeProvider>
   );

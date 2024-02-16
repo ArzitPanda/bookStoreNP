@@ -15,6 +15,7 @@ import CreateOrderForm from "@/components/order/CreateOrderForm";
 import { useSelector, useDispatch } from "react-redux";
 import { createNewOrder } from "@/store/Order/OrderSlice";
 import OrderList from "@/components/order/OrderList";
+import { actions } from "@/store/NotificationSlice";
 // import OrderList from './OrderList';
 
 const OrderManagementPage = () => {
@@ -73,6 +74,11 @@ const OrderManagementPage = () => {
       const data = { customer_id: userId, books: bookSelected, discount: 0 };
 
       dispatch(createNewOrder(data));
+        setBookSelected([]);
+         //
+        dispatch(actions.showNotification({message:'order created successfully',type:'info'}))
+        setTimeout(() => dispatch(actions.hideNotification()),[2000]);
+
     } catch (error) {
       console.error("Error creating order:", error);
     }

@@ -34,8 +34,8 @@ const TopNBarChart = () => {
       {
         label: 'Total Quantity Ordered',
         data: data,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: '#1DA1F2',
+        borderColor: '#1DA1F2',
         borderWidth: 1,
       },
     ],

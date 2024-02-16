@@ -23,19 +23,20 @@ const CategoryBarChart = () => {
   }, []);
 
   const chartData = {
-    labels: salesData.map(ele=>ele.name), // Ensure that labels are strings representing categories
+    labels: salesData.map(ele => ele.name),
     datasets: [
       {
         label: 'Total Quantity',
-        backgroundColor: 'rgba(75,192,192,0.2)',
-        borderColor: 'rgba(75,192,192,1)',
+        backgroundColor: '#1DA1F2', // Set the background color to #1DA1F2
+        borderColor: 'white', // Set the border color to white
         borderWidth: 1,
-        hoverBackgroundColor: 'rgba(75,192,192,0.4)',
+        hoverBackgroundColor: '#2795D9',
         hoverBorderColor: 'rgba(75,192,192,1)',
         data: salesData.map(item => parseInt(item.total_quantity))
       }
     ]
   };
+  
   
 
   return (

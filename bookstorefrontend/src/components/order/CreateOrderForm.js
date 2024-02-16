@@ -3,13 +3,15 @@ import { useDispatch, useSelector} from 'react-redux';
 import { Box, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { createNewOrder } from '@/store/Order/OrderSlice'; // Assuming you have an API function for creating orders
 import { fetchAllBooks } from '@/store/Book/BookSlice';
+// import { useNotification } from '../NotificationProvider/useNotification';
+import {actions} from '@/store/NotificationSlice'
 
 
 const CreateOrderForm = ({bookSelected,setBookSelected,context}) => {
 
 
     const dispatch = useDispatch();
-
+  
     const books = useSelector((state)=>state.books.books);
   const [formData, setFormData] = useState({
     book_id: '',
@@ -35,13 +37,17 @@ const CreateOrderForm = ({bookSelected,setBookSelected,context}) => {
         const books =[...bookSelected,formData];
     setBookSelected(books)
     setSuccessMessage('sucessfully added in order to buy');
+      dispatch(actions.showNotification({message:'sucessfully added the order',type:'info'}))
     setFormData({
     
         book_id: '',
         quantity: 0,
       });
 
-      console.log(bookSelected)
+      setTimeout(() => dispatch(actions.hideNotification()),[2000]);
+
+
+ 
   };
 
 

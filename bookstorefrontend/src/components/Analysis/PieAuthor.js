@@ -24,20 +24,25 @@ const PieChart = () => {
     datasets: [{
       data: authorsData.map(item => item.total_quantity_sold),
       backgroundColor: [
-        'rgba(255, 99, 132, 0.6)',
-        'rgba(54, 162, 235, 0.6)',
-        'rgba(255, 206, 86, 0.6)',
-        'rgba(75, 192, 192, 0.6)',
-        'rgba(153, 102, 255, 0.6)',
-        'rgba(255, 159, 64, 0.6)'
-      ]
+        '#6ec6ff', // Lighter Shade
+        '#0b7cc6', // Darker Shade
+        '#4ebdff', // Lighter Blue
+        '#007acc', // Darker Blue
+        '#33daff'  // Lighter Turquoise
+      ],
     }]
   };
-
+  const options = {
+    plugins: {
+      legend: {
+        display: false, // Hide the legend
+      },
+    },
+  };
   return (
     <div>
       <h2>Most Loved Authors</h2>
-      <Pie data={chartData} />
+      <Pie data={{...chartData}}  options={options}/>
     </div>
   );
 };
