@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000/api'; // Replace with your API base URL
+const BASE_URL = 'https://bookstorenp.onrender.com/api'; // Replace with your API base URL
 
 export const getAllBooks = async () => {
   try {

@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Define the base URL for the API
-const baseURL = 'http://localhost:3000/api/customers';
+const baseURL = 'https://bookstorenp.onrender.com/api/customers';
 
 // Fetch all customers from the server
 export const fetchCustomers = createAsyncThunk('customers/fetchCustomers', async () => {

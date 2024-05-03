@@ -129,7 +129,7 @@ export default function RootLayout({ children }) {
       anchor="left"
     >
 
-        <StoreAvatarCard adminName={"arzit panda"} storeName={'books store'} avatarUrl={'https://img.freepik.com/premium-vector/city-building-vintage-book-store-facade-cartoon-house-exterior-with-entrance-book-shop_212168-933.jpg'} />
+        <StoreAvatarCard adminName={"Dibyajyoti Sahoo"} storeName={'books store'} avatarUrl={'https://img.freepik.com/premium-vector/city-building-vintage-book-store-facade-cartoon-house-exterior-with-entrance-book-shop_212168-933.jpg'} />
 
     
       <List sx={{paddingLeft:2,paddingRight:4,marginTop:4}}>

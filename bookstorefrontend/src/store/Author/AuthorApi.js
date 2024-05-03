@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000/api'; // Assuming your server is running on this URL
+const BASE_URL = 'https://bookstorenp.onrender.com/api'; // Assuming your server is running on this URL
 
 export const fetchAuthors = async () => {
   try {

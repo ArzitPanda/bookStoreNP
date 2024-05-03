@@ -89,12 +89,12 @@ const BookComponent = () => {
   };
 
   const handleUpdateBook = () => {
-    dispatch(modifyBook(selectedBook.id, formData));
+    dispatch(modifyBook(selectedBook?.id, formData));
     handleCloseModal();
   };
 
-  const handleDeleteBook = () => {
-    dispatch(removeBook(selectedBook.id));
+  const handleDeleteBook = (id) => {
+    dispatch(removeBook(id));
     handleCloseModal();
   };
 

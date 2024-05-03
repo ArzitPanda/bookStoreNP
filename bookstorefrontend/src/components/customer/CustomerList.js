@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination,TextField, IconButton, Modal, Typography, Button, Card, CardContent } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination,TextField, IconButton, Modal, Typography, Button, Card, CardContent, Snackbar } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import {updateCustomer,deleteCustomer,fetchCustomers } from '@/store/Customer/CustomerApi'; // Import the updateCustomer and deleteCustomer actions from your customer slice
 
@@ -59,12 +59,24 @@ dispatch(fetchCustomers());
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  const handleRowClick = (id) => {
+    // Copy ID to clipboard
+    navigator.clipboard.writeText(id);
+    // Show notification
+    setSnackbarOpen(true);
+  }
+
   return (
     <Paper elevation={3} sx={{ padding: 2 }}>
      <TableContainer>
         <Table>
           <TableHead>
-            <TableRow>
+            <TableRow  >
+            <TableCell>Id</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Address</TableCell>
@@ -74,7 +86,8 @@ dispatch(fetchCustomers());
           </TableHead>
           <TableBody>
             {customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((customer) => (
-              <TableRow key={customer.id}>
+              <TableRow key={customer.id} onClick={() => handleRowClick(customer.id)}>
+                 <TableCell>{customer.id}</TableCell>
                 <TableCell>{customer.name}</TableCell>
                 <TableCell>{customer.email}</TableCell>
                 <TableCell>{customer.address}</TableCell>
@@ -98,7 +111,12 @@ dispatch(fetchCustomers());
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
  
-      
+ <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000}
+        onClose={() => setSnackbarOpen(false)}
+        message="ID copied"
+      />
       {/* Update Customer Modal */}
       <Modal open={openUpdateModal} onClose={handleCloseModal}>
   <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '20px', borderRadius: '5px', boxShadow: '0px 3px 15px rgba(0, 0, 0, 0.2)' }}>
